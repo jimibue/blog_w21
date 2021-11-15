@@ -11,4 +11,16 @@ class PagesController < ApplicationController
     # via 'props'
     render component: "Pages", props: { pages: pages }
   end
+
+  def new
+    render component: "PageNew"
+  end
+
+  def create
+    Page.create(title: params[:page][:title], author: params[:page][:author])
+
+    # want to go back to pages index '/pages'
+    # this really does a get request to '/pages'
+    redirect_to pages_path
+  end
 end
